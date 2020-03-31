@@ -1,0 +1,19 @@
+{% extends "rickandmortyapp/base.html" %}
+{% block content %}
+    {% for personaje in personajes %}
+        <article class="media content-section">
+            <div class="media">
+                <img class="rounded-circle article-img" src="{{personaje.image}}">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <h2><a href="{% url 'rickandmortyapp-character' id=personaje.id %}"> {{ personaje.name }}</a></h2>
+                    </div>
+                    <small class="text">Estado: {{personaje.status}},</small>
+                    <small class="text">Especie: {{personaje.species}},</small>
+                    <small class="text">Género: {{personaje.gender}}</small>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+    
+{% endblock content %}

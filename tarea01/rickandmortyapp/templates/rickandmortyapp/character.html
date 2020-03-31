@@ -1,0 +1,23 @@
+{% extends "rickandmortyapp/base.html" %}
+{% block content %}
+    <article class="media content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{char.image}}">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <h2>{{ char.name }}</h2>
+                </div>
+                <small class="text">Estado: {{char.status}},</small>
+                <small class="text">Especie: {{char.species}},</small>
+                <small class="text">Género: {{char.gender}},</small>
+                <small class="text"><a href="{% url 'rickandmortyapp-location' name=char.origin.name %}">Lugar de Origen: {{char.origin.name}},</a></small>
+                <small class="text"><a href="{% url 'rickandmortyapp-location' name=char.location.name %}">Locación: {{char.location.name}}</a></small>
+                <h4>Episodios en los que ha estado: </h4>
+                {% for episode in episodes %}
+                    <a href="{% url 'rickandmortyapp-episode' id=episode.id %}"><p>{{episode.name}}</p></a>
+                {% endfor %}
+            </div>
+        </div>
+    </article>
+    
+{% endblock content %}

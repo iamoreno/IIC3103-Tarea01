@@ -1,0 +1,15 @@
+{% extends "rickandmortyapp/base.html" %}
+{% block content %}
+    <h1>Episodios</h1>
+    {% for episode in results %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="{% url 'rickandmortyapp-episode' id=episode.id %}">{{ episode.name }}</a>
+                    <small class="text-muted">{{ episode.air_date }}</small>
+                </div>
+                <p class="article-content">{{ episode.episode }}</p>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

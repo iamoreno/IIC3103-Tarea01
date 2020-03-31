@@ -1,0 +1,18 @@
+{% extends "rickandmortyapp/base.html" %}
+{% block content %}
+    {% for location in results %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <h2>{{location.name}}</h2>
+                </div>
+                <p class="article-content">Tipo: {{location.type}}</p>
+                <p class="article-content">Dimensión: {{location.dimension}}</p>
+                <p class="article-content">Lista de residentes: </p>
+                {% for residente in characters%}
+                <p><a class="mr-2" href="{% url 'rickandmortyapp-character' id=residente.id %}">{{ residente.name }}</a></p>
+                {% endfor %}
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

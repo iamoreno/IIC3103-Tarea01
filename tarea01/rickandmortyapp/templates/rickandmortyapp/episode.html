@@ -1,0 +1,16 @@
+{% extends "rickandmortyapp/base.html" %}
+{% block content %}
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <h1>{{ episode.name }}</h1>
+                <small class="text-muted">{{ episode.air_date }} - {{ episode.episode }}</small>
+            </div>
+            <p class="article-content">Personajes en el capítulo: </p>
+            {% for char in chars%}
+                <p><a class="mr-2" href="{% url 'rickandmortyapp-character' id=char.id %}">{{ char.name }}</a></p>                
+            {% endfor %}
+        </div>
+    </article>
+    
+{% endblock content %}

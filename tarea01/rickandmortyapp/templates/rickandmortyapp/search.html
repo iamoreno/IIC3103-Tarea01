@@ -1,0 +1,85 @@
+{% extends "rickandmortyapp/base.html" %}
+{% block content %}
+<div>    
+    <h1>Personajes</h1>
+    {% if personajes %}
+        {% for char in personajes.results %}
+            <article class="media content-section">
+                <div class="media">
+                    <img class="rounded-circle article-img"  src="{{char.image}}">
+                    <div class="media-body">
+                        <div class="article-metadata">
+                            <a class="mr-2" href="{% url 'rickandmortyapp-character' id=char.id %}">{{ char.name }}</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <article class="media content-section">
+            <div class="media">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <h4>No se encontraron coincidencias.</h4>
+                    </div>
+                </div>
+            </div>
+        </article>
+    {% endif %}
+</div>
+<div>    
+    <h1>Episodios</h1>
+    {% if episodios %}
+        {% for episodio in episodios.results %}
+            <article class="media content-section">
+                <div class="media">
+                    <div class="media-body">
+                        <div class="article-metadata">
+                            <a class="mr-2" href="{% url 'rickandmortyapp-episode' id=episodio.id %}">{{ episodio.name }}</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <article class="media content-section">
+            <div class="media">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <h4>No se encontraron coincidencias.</h4>
+                    </div>
+                </div>
+            </div>
+        </article>
+    {% endif %}
+</div>
+<div>    
+    <h1>Lugares</h1>
+    {% if lugares %}
+        {% for lugar in lugares.results %}
+            <article class="media content-section">
+                <div class="media">
+                    <div class="media-body">
+                        <div class="article-metadata">
+                            <a class="mr-2" href="{% url 'rickandmortyapp-location' name=lugar.name %}">{{ lugar.name }}</a>
+                            <small class="text-muted">Dimensión: {{ lugar.dimension }}</small>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <article class="media content-section">
+            <div class="media">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <h4>No se encontraron coincidencias.</h4>
+                    </div>
+                </div>
+            </div>
+        </article>
+    {% endif %}
+</div>
+
+
+{% endblock content %}
