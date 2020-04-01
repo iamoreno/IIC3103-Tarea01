@@ -20,7 +20,7 @@
             {% if personajes %}
                 {% for char in personajes.results %}
                 <article class="post featured">
-                    <h4>{{ char.name }}</h4>
+                    <a href="{% url 'rickandmortyapp-character' id=char.id %}"><h4>{{ char.name }}</h4></a>
                     <img src="{{char.image}}" alt="" />
                 </article>
                 {% endfor %}
