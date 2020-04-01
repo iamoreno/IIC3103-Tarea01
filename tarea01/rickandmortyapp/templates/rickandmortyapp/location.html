@@ -1,18 +1,30 @@
 {% extends "rickandmortyapp/base.html" %}
 {% block content %}
+<nav id="nav">
+	<ul class="links">
+		<li><a href="{% url 'rickandmortyapp-home' %}">Episodios</a></li>
+		<li><a href="{% url 'rickandmortyapp-characters' %}">Personajes</a></li>
+		<li><a href="{% url 'rickandmortyapp-locations' %}">Lugares</a></li>
+	</ul>
+	<ul class="icons">
+		<li><form method="GET" action="">
+			<input name="query" type="search" placeholder="  Search" aria-label="Search">
+			<button formaction="/search" type="submit" >Search</button>
+		</form></li>
+	</ul>
+</nav>
+<div id="main">
+    <section class="posts">
     {% for location in results %}
-        <article class="media content-section">
-            <div class="media-body">
-                <div class="article-metadata">
+                <article class="post featured">
+                    <span class="date">{{location.type}} - {{location.dimension}}</span>
                     <h2>{{location.name}}</h2>
-                </div>
-                <p class="article-content">Tipo: {{location.type}}</p>
-                <p class="article-content">Dimensión: {{location.dimension}}</p>
-                <p class="article-content">Lista de residentes: </p>
-                {% for residente in characters%}
-                <p><a class="mr-2" href="{% url 'rickandmortyapp-character' id=residente.id %}">{{ residente.name }}</a></p>
-                {% endfor %}
-            </div>
-        </article>
+                    <h4>Lista de residentes: </h4>
+                    {% for residente in characters%}
+                    <span style="margin: 5px;"><a href="{% url 'rickandmortyapp-character' id=residente.id %}">{{ residente.name }}</a></span>
+                    {% endfor %}
+                </article>
     {% endfor %}
+    </section>
+</div>
 {% endblock content %}

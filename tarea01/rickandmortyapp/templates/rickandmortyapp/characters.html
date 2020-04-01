@@ -1,19 +1,37 @@
 {% extends "rickandmortyapp/base.html" %}
 {% block content %}
+<nav id="nav">
+	<ul class="links">
+		<li><a href="{% url 'rickandmortyapp-home' %}">Episodios</a></li>
+		<li class="active"><a href="{% url 'rickandmortyapp-characters' %}">Personajes</a></li>
+		<li><a href="{% url 'rickandmortyapp-locations' %}">Lugares</a></li>
+	</ul>
+	<ul class="icons">
+		<li><form method="GET" action="">
+			<input name="query" type="search" placeholder="  Search" aria-label="Search">
+			<button formaction="/search" type="submit" >Search</button>
+		</form></li>
+	</ul>
+</nav>
+<div id="main">
+    <section class="posts">
     {% for personaje in personajes %}
-        <article class="media content-section">
-            <div class="media">
-                <img class="rounded-circle article-img" src="{{personaje.image}}">
-                <div class="media-body">
-                    <div class="article-metadata">
-                        <h2><a href="{% url 'rickandmortyapp-character' id=personaje.id %}"> {{ personaje.name }}</a></h2>
-                    </div>
-                    <small class="text">Estado: {{personaje.status}},</small>
-                    <small class="text">Especie: {{personaje.species}},</small>
-                    <small class="text">Género: {{personaje.gender}}</small>
-                </div>
-            </div>
-        </article>
+            <article class="post featured">
+                <h2><a href="{% url 'rickandmortyapp-character' id=personaje.id %}">{{ personaje.name }}</a></h2>
+                <img src="{{personaje.image}}" alt="" />
+            </article>
+            <article class="post featured">
+                <br>
+                <br>
+                <h6>Estado: {{personaje.status}},</h6>
+                <h6>Especie: {{personaje.species}},</h6>
+                <h6>Género: {{personaje.gender}},</h6>
+                <h5><a href="{% url 'rickandmortyapp-location' name=personaje.origin.name %}">Lugar de Origen: {{personaje.origin.name}},</a></h5>
+                <h5><a href="{% url 'rickandmortyapp-location' name=personaje.location.name %}">Locación: {{personaje.location.name}}</a></h5>
+            </article>
+
     {% endfor %}
+    </section>
+</div>
     
 {% endblock content %}

@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .services import get_episodes, get_episode_by_id, get_multiple_char, get_char_by_id, get_location_by_name, get_char_by_name
-from .services import get_episode_by_name, get_characters, get_locations
+from .services import get_episode_by_name, get_characters, get_locations, e_img
 
 def home(request):
     lista = []
     for i in range(31):
         lista.append(i+1)
     context = {
-        'results': get_episodes(lista)
+        'results': get_episodes(lista),
+        'imagenes': e_img
         }
     return render(request, 'rickandmortyapp/home.html', context)
 
@@ -21,7 +22,8 @@ def episode(request, id):
     chars = get_multiple_char(lista)
     context = {
         "episode" : episode,
-        "chars" : chars
+        "chars" : chars,
+        "imagen": e_img[id]
     }
     return render(request, 'rickandmortyapp/episode.html', context)
 
@@ -71,7 +73,8 @@ def search(request):
     context = {
         'personajes': personajes,
         'episodios': episodios,
-        'lugares': lugares
+        'lugares': lugares,
+        'imagenes': e_img
     }
     return render(request, 'rickandmortyapp/search.html', context)
 

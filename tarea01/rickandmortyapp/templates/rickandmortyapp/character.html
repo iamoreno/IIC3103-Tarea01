@@ -1,23 +1,37 @@
 {% extends "rickandmortyapp/base.html" %}
+{% load static %}
 {% block content %}
-    <article class="media content-section">
-        <div class="media">
-            <img class="rounded-circle account-img" src="{{char.image}}">
-            <div class="media-body">
-                <div class="article-metadata">
-                    <h2>{{ char.name }}</h2>
-                </div>
-                <small class="text">Estado: {{char.status}},</small>
-                <small class="text">Especie: {{char.species}},</small>
-                <small class="text">Género: {{char.gender}},</small>
-                <small class="text"><a href="{% url 'rickandmortyapp-location' name=char.origin.name %}">Lugar de Origen: {{char.origin.name}},</a></small>
-                <small class="text"><a href="{% url 'rickandmortyapp-location' name=char.location.name %}">Locación: {{char.location.name}}</a></small>
-                <h4>Episodios en los que ha estado: </h4>
+<nav id="nav">
+	<ul class="links">
+		<li><a href="{% url 'rickandmortyapp-home' %}">Episodios</a></li>
+		<li><a href="{% url 'rickandmortyapp-characters' %}">Personajes</a></li>
+		<li><a href="{% url 'rickandmortyapp-locations' %}">Lugares</a></li>
+	</ul>
+	<ul class="icons">
+		<li><form method="GET" action="">
+			<input name="query" type="search" placeholder="  Search" aria-label="Search">
+			<button formaction="/search" type="submit" >Search</button>
+		</form></li>
+	</ul>
+</nav>
+    <div id="main">
+        <section class="posts">
+            <article class="post featured">
+                <h2>{{ char.name }}</h2>
+                <img src="{{char.image}}" alt="" />
+                <h6>Estado: {{char.status}},</h6>
+                <h6>Especie: {{char.species}},</h6>
+                <h6>Género: {{char.gender}},</h6>
+                <h5><a href="{% url 'rickandmortyapp-location' name=char.origin.name %}">Lugar de Origen: {{char.origin.name}},</a></h5>
+                <h5><a href="{% url 'rickandmortyapp-location' name=char.location.name %}">Locación: {{char.location.name}}</a></h5>
+            </article>
+            <article class="post featured">
+                <h2>Episodios en los que ha estado: </h2>
                 {% for episode in episodes %}
-                    <a href="{% url 'rickandmortyapp-episode' id=episode.id %}"><p>{{episode.name}}</p></a>
+                    <a href="{% url 'rickandmortyapp-episode' id=episode.id %}"><h5>{{episode.name}}</h5></a>
                 {% endfor %}
-            </div>
-        </div>
-    </article>
+            </article>
+        </section>
+    </div>
     
 {% endblock content %}

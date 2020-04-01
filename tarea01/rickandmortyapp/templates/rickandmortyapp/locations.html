@@ -1,17 +1,30 @@
 {% extends "rickandmortyapp/base.html" %}
+{% load static %}
 {% block content %}
+<nav id="nav">
+	<ul class="links">
+		<li><a href="{% url 'rickandmortyapp-home' %}">Episodios</a></li>
+		<li><a href="{% url 'rickandmortyapp-characters' %}">Personajes</a></li>
+		<li class="active"><a href="{% url 'rickandmortyapp-locations' %}">Lugares</a></li>
+	</ul>
+	<ul class="icons">
+		<li><form method="GET" action="">
+			<input name="query" type="search" placeholder="  Search" aria-label="Search">
+			<button formaction="/search" type="submit" >Search</button>
+		</form></li>
+	</ul>
+</nav>
+<div id="main">
+    <section class="posts">
     {% for lugar in lugares %}
-        <article class="media content-section">
-            <div class="media">
-                <div class="media-body">
-                    <div class="article-metadata">
+                <article>
+                    <header>
                         <h2><a href="{% url 'rickandmortyapp-location' name=lugar.name %}"> {{ lugar.name }}</a></h2>
-                    </div>
-                    <small class="text">Tipo: {{lugar.type}},</small>
-                    <small class="text">Dimensión: {{lugar.dimension}}</small>
-                </div>
-            </div>
-        </article>
+                    </header>
+                    <h3>Tipo: {{lugar.type}},</h3>
+                    <h3>Dimensión: {{lugar.dimension}}</h3>
+                </article>   
     {% endfor %}
-    
+    </section>
+</div>
 {% endblock content %}
